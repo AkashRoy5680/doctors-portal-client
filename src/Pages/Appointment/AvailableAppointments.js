@@ -11,7 +11,7 @@ const AvailableAppointments = ({ date }) => {
 
   const formattedDate=format(date,"PP")
 
-  const{data:services,isLoading,refetch}=useQuery(["akash",formattedDate], ()=> fetch(`http://localhost:5000/available?date=${formattedDate}`)
+  const{data:services,isLoading,refetch}=useQuery(["sky",formattedDate], ()=> fetch(`http://localhost:5000/available?date=${formattedDate}`)
   .then((res) => res.json()))
 
   if(isLoading){
