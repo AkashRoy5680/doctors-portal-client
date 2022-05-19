@@ -45,6 +45,8 @@ const ManageDoctors = () => {
         {
             deletingDoctor && <DeleteConfirmModel
             deletingDoctor={deletingDoctor}
+            refetch={refetch}
+            setDeletingDoctor={setDeletingDoctor}
             ></DeleteConfirmModel>
         }
         </div>
