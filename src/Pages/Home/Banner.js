@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import chair from "../../assets/images/chair.png";
 import PrimaryButton from "../Shared/PrimaryButton";
 
 const Banner = () => {
+  const navigate=useNavigate()
   return (
     <div class="hero min-h-screen">
       <div class="hero-content flex-col lg:flex-row-reverse">
@@ -14,7 +16,7 @@ const Banner = () => {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <PrimaryButton>Get Started</PrimaryButton>
+          <PrimaryButton onClick={()=>navigate("/appointment")}>Get Started</PrimaryButton>
         </div>
       </div>
     </div>

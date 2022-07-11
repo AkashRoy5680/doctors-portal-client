@@ -17,7 +17,7 @@ const Home = () => {
            <BannerX></BannerX>
            <MakeAppointment></MakeAppointment>
            <Feedback></Feedback>
-           <Testimonials></Testimonials>
+         
            <Footer></Footer>
         </div>
     );
