@@ -10,12 +10,11 @@ import "swiper/css/autoplay";
 // import required modules
 import { Pagination, Autoplay } from "swiper";
 
-
 const Feedback = () => {
   const [allReviews, setAllReviews] = useState([]);
   const [sortedReview, setSortedReview] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch("https://doctors-portal-server-afgw.onrender.com/review")
       .then((res) => res.json())
       .then((data) => setAllReviews(data));
   }, []);
@@ -27,12 +26,12 @@ const Feedback = () => {
   }, [allReviews]);
 
   return (
-    <div className="bg-primary py-10 px-2">
+    <div className="bg-primary mt-20 py-10 px-2">
       <div className="flex items-center justify-center  pb-4 ">
         <h1 className="text-3xl text-center uppercase text-base-100 font-semibold">
           {" "}
           Customer Feedback
-        </h1> 
+        </h1>
       </div>
 
       <div className="flex justify-center items-center gap-2 mb-16">

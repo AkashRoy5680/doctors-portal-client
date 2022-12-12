@@ -5,59 +5,64 @@ import { toast } from "react-toastify";
 import Loading from "../Shared/Loading";
 
 const AddDoctor = () => {
-  const {register,formState: { errors },handleSubmit,reset} = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
 
   const { data: services, isLoading } = useQuery("services", () =>
-    fetch("http://localhost:5000/service").then((res) => res.json())
+    fetch("https://doctors-portal-server-afgw.onrender.com/service").then(
+      (res) => res.json()
+    )
   );
 
-  const imageStorageKey=`d763bce467f9bd0b5f920d60fb4e62b6`;
+  const imageStorageKey = `d763bce467f9bd0b5f920d60fb4e62b6`;
 
   const onSubmit = async (data) => {
     console.log("data", data);
     //send image data to imagebb
-    const image=data.image[0];
+    const image = data.image[0];
     const formData = new FormData();
-    formData.append('image', image);
-    const url=`https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
-    fetch(url,{
-        method:"POST",
-        body:formData
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
     })
-    .then(res=>res.json())
-    .then(result=>{
-        console.log("imgbb",result)
-        if(result.success){
-            const img=result.data.url;
-            const doctor={
-                name:data.name,
-                email:data.email,
-                speciality:data.speciality,
-                img:img
-            }
-        //send to my database
-        fetch("http://localhost:5000/doctor",{
-            method:"POST",
-            headers:{
-                "content-type":"application/json",
-                authorization:`Bearer ${localStorage.getItem("accessToken")}`
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("imgbb", result);
+        if (result.success) {
+          const img = result.data.url;
+          const doctor = {
+            name: data.name,
+            email: data.email,
+            speciality: data.speciality,
+            img: img,
+          };
+          //send to my database
+          fetch("https://doctors-portal-server-afgw.onrender.com/doctor", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-            body:JSON.stringify(doctor)
-        })
-        .then(res=>res.json())
-        .then(inserted=>{
-            console.log("doctor",inserted);
-        if(inserted.insertedId){
-            toast.success("Doctors added Successfully");
-            reset();
+            body: JSON.stringify(doctor),
+          })
+            .then((res) => res.json())
+            .then((inserted) => {
+              console.log("doctor", inserted);
+              if (inserted.insertedId) {
+                toast.success("Doctors added Successfully");
+                reset();
+              } else {
+                toast.error("Failed to add the doctor");
+              }
+            });
         }
-        else{
-            toast.error("Failed to add the doctor")
-        }
-
-        })
-      }           
-    });
+      });
   };
 
   if (isLoading) {
@@ -128,13 +133,15 @@ const AddDoctor = () => {
           <label class="label">
             <span class="label-text">Speciality</span>
           </label>
-          <select {...register("speciality")} class="select w-full max-w-xs input-bordered">
-              {
-                  services.map(service=><option
-                  key={service._id}
-                  value={service.name}
-                  >{service.name}</option>)
-              }
+          <select
+            {...register("speciality")}
+            class="select w-full max-w-xs input-bordered"
+          >
+            {services.map((service) => (
+              <option key={service._id} value={service.name}>
+                {service.name}
+              </option>
+            ))}
           </select>
         </div>
 

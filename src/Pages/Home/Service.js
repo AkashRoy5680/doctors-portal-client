@@ -8,7 +8,7 @@ const Service = ({ service }) => {
       </figure>
       <div class="card-body items-center text-center">
         <h2 class="card-title">{service.name}</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <p>Dentists provide professional fluoride treatments in the form of a highly concentrated rinse, foam, gel, or varnish.</p>
         <div class="card-actions">
           <button class="btn btn-primary">Buy Now</button>
         </div>

@@ -28,11 +28,11 @@ const AddAReview = () => {
         name: user.displayName,
         address: "CEO, Manpol",
       };
-      fetch("http://localhost:5000/review", {
+      fetch("https://doctors-portal-server-afgw.onrender.com/review", {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          authorization:`Bearer ${localStorage.getItem("accessToken")}`
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(data),
       })
@@ -53,7 +53,7 @@ const AddAReview = () => {
   return (
     <div className="bg-base-100 h-full  text-accent ">
       <div className="w-11/12 md:w-4/6 xl:w-3/6 mx-4 md:mx-8  lg:mx-20">
-        <h1 className="text-4xl uppercase  font-koulen font-bold pt-10 text-secondary">
+        <h1 className="text-4xl uppercase  font-koulen font-bold pt-10 text-accent">
           feedback
         </h1>
         <h1 className=" mt-8 mb-1  text-white  text-xl font-koulen">
@@ -62,22 +62,22 @@ const AddAReview = () => {
             {user?.displayName}
           </span>
         </h1>
-        <p className="text-gray-400 font-koulen text-[14px]">
+        <p className="text-gray-900 font-koulen text-[14px]">
           Hope you are setisfy to get service form us.We want you to share your
           experience to us. That will helping us and also help others who are
           wanted getting service form us.Thank you
         </p>
         <div className=" flex items-center gap-5 text mt-3 ">
-          <span className="text-gray-400 font-bold font-koulen">
+          <span className="text-gray-900 font-bold font-koulen">
             Your Ratings :
           </span>
-          <div className="flex space-x-1 h-8 bg-secondary rounded-full items-center  ">
+          <div className="flex space-x-1 h-8 bg-primary rounded-full items-center  ">
             <button onClick={decrease} className="">
               {" "}
               <MinusCircleIcon className="h-8 w-8"></MinusCircleIcon>
             </button>
             <input
-              className="text-lg bg-secondary text-center w-10 text-primary font-bold font-koulen focus:outline-none"
+              className="text-lg bg-secondary text-center w-10 text-white font-bold font-koulen focus:outline-none"
               value={rating}
               readOnly
             />

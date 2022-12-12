@@ -17,14 +17,11 @@ const MakeAppointment = () => {
       </div>
       <div class="flex-1 px-5">
         <h3 class="text-xl text-primary">Appointment</h3>
-        <h2 class="text-3xl py-5">Make an appointment today</h2>
+        <h2 class="text-3xl py-5 text-secondary">Make an appointment today</h2>
         <p class="text-white pb-5">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          modi explicabo repellat, perferendis odio architecto dignissimos
-          repudiandae ipsam perspiciatis et dolorem qui tempora blanditiis ab
-          rem a, sint ullam exercitationem.
+        At Mayo Clinic, our mission is to offer a more convenient way to find and access healthcare online. We make it easy to find a doctor, book an appointment, and see a doctor sooner.
         </p>
-        <PrimaryButton onClick={()=>navigate('/appointment')}>Get Started</PrimaryButton>
+        <PrimaryButton onClick={()=>navigate('/appointment')}>Let Started</PrimaryButton>
       </div>
     </section>
   );

@@ -20,9 +20,9 @@ const Navbar = () => {
       <li>
         <Link to="/appointment">Appointment</Link>
       </li>
-      <li>
+     {/* <li>
         <Link to="/review">Review</Link>
-      </li>
+  </li> */}
       <li>
         <Link to="/contact">Contact</Link>
       </li>

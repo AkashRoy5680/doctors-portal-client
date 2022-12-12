@@ -7,18 +7,21 @@ import auth from "../../firebase.init";
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [user] = useAuthState(auth);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/booking?patient=${user.email}`,{
-        method:"GET",
-        headers:{
-          "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      fetch(
+        `https://doctors-portal-server-afgw.onrender.com/booking?patient=${user.email}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
         }
-      })
+      )
         .then((res) => {
-          console.log("res",res);
-          if(res.status===401||res.status===403){
+          console.log("res", res);
+          if (res.status === 401 || res.status === 403) {
             signOut(auth);
             localStorage.removeItem("accessToken");
             navigate("/");
@@ -46,23 +49,33 @@ const MyAppointments = () => {
             </tr>
           </thead>
           <tbody>
-              {
-                  appointments.map((a,index)=> <tr key={a._id}>
-                    <th>{index+1}</th>
-                    <td>{a.patient}</td>
-                    <td>{a.date}</td>
-                    <td>{a.slot}</td>
-                    <td>{a.treatment}</td>
-                    <td>
-                  {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className="btn btn-xs btn-success">pay</button></Link>}
-                  {(a.price && a.paid) && <div>
-                  <p><span className="text-success">Paid</span></p>
-                  <p>Transaction Id:<span className="text-success">{a.transactionId}</span></p>
-                  </div>}
-                    </td>
-                  </tr>)
-              }
-           
+            {appointments.map((a, index) => (
+              <tr key={a._id}>
+                <th>{index + 1}</th>
+                <td>{a.patient}</td>
+                <td>{a.date}</td>
+                <td>{a.slot}</td>
+                <td>{a.treatment}</td>
+                <td>
+                  {a.price && !a.paid && (
+                    <Link to={`/dashboard/payment/${a._id}`}>
+                      <button className="btn btn-xs btn-success">pay</button>
+                    </Link>
+                  )}
+                  {a.price && a.paid && (
+                    <div>
+                      <p>
+                        <span className="text-success">Paid</span>
+                      </p>
+                      <p>
+                        Transaction Id:
+                        <span className="text-success">{a.transactionId}</span>
+                      </p>
+                    </div>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

@@ -9,22 +9,28 @@ const AvailableAppointments = ({ date }) => {
   //const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
 
-  const formattedDate=format(date,"PP")
+  const formattedDate = format(date, "PP");
 
-  const{data:services,isLoading,refetch}=useQuery(["sky",formattedDate], ()=> fetch(`http://localhost:5000/available?date=${formattedDate}`)
-  .then((res) => res.json()))
+  const {
+    data: services,
+    isLoading,
+    refetch,
+  } = useQuery(["sky", formattedDate], () =>
+    fetch(
+      `https://doctors-portal-server-afgw.onrender.com/available?date=${formattedDate}`
+    ).then((res) => res.json())
+  );
 
-  if(isLoading){
-    return <Loading></Loading>
+  if (isLoading) {
+    return <Loading></Loading>;
   }
 
   /*useEffect(() => {
-    fetch(`http://localhost:5000/available?date=${formattedDate}`)
-   //fetch("http://localhost:5000/service")
+    fetch(`https://doctors-portal-server-afgw.onrender.com/available?date=${formattedDate}`)
+   //fetch("https://doctors-portal-server-afgw.onrender.com/service")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);*/
-
 
   return (
     <div>
